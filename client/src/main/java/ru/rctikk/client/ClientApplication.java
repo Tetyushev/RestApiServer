@@ -9,18 +9,26 @@ import java.net.http.HttpResponse;
 
 public class ClientApplication {
     public static void main(String[] args) throws Exception {
-        HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/api/hello"))
-                .GET()
-                .build();
-        Tensor tensor = Tensor.random(2, 3);
+        try {
+            // Создание тензора
+            Tensor tensor = Tensor.random(2, 3, 4); // 3D тензор
 
-        HttpResponse<String> httpResponse = httpClient.send(
-                httpRequest,
-                HttpResponse.BodyHandlers.ofString()
-        );
+            // Преобразование в формат для отправки
+            TensorData tensorData = new TensorData(
+                    tensor.getShape(),
+                    tensor.getData()
+            );
 
-        System.out.println("Response: " + httpResponse.body());
+            // Создание клиента
+            TensorClient client = new TensorClient("http://localhost:8080");
+
+            // Отправка тензора
+            String response = client.sendTensor(tensorData);
+            System.out.println("Server response: " + response);
+
+        } catch (Exception e) {
+            System.err.println("Error sending tensor: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
