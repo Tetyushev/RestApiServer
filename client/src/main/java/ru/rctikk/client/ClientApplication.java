@@ -1,7 +1,5 @@
 package ru.rctikk.client;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -9,13 +7,17 @@ import java.net.http.HttpResponse;
 
 public class ClientApplication {
     public static void main(String[] args) throws Exception {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create("http://localhost:8080/api/hello"))
+                .GET()
                 .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> httpResponse = httpClient.send(
+                httpRequest,
+                HttpResponse.BodyHandlers.ofString()
+        );
 
-        System.out.println("Response: " + response.body());
+        System.out.println("Response: " + httpResponse.body());
     }
 }

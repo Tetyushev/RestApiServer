@@ -1,4 +1,4 @@
-package ru.rctikk.client;
+package ru.rctikk.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,3 +9,4 @@ public class ServerApplication {
         SpringApplication.run(ServerApplication.class, args);
     }
 }
+

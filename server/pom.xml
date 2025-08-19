@@ -3,7 +3,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>ru,rctikk.server</groupId>
+        <groupId>ru.rctikk</groupId>
         <artifactId>rest-project</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
